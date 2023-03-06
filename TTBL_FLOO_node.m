@@ -17,7 +17,7 @@ Numberofnode2=linspace(Numberofnode3,Numberofnode4,ND2); % feature node groups
 Numberofnode3=linspace(Numberofnode5,Numberofnode6,ND3); % enhancement nodes
 
 disp('Start the parameters selection by FLOO-CV...');
-%%------------------------3.建立FlOO_Lamda模型-----------------------------
+%%-------------------3.FLOO-CV-----------------------------
 disp('Select the parameter k for TTBL...');
 for m=1:3
     for t1=1:ND1
@@ -38,16 +38,16 @@ for m=1:3
                     disp('Select the parameter Gamma for TTBL...'); 
                     H0=(Ae*H*H'+ones(size(H*H'))+Gamma(i)*L*H*H'); 
                     YX=[YX1;YX2];
-                    % Hs=H(1:Ns,:); YX=YX1; 
+                    % Hs=H(1:Ns,:); YX=YX1;
                     % H0=(Hs'*Hs+ones(size(Hs'*Hs))+Gamma(i)*H'*L*H);
                     for j=1:Ns
                         yi=YX(j,:);
                         Hi=H(j,:);
+                        % Calculate the i-th cross validation error
                         HJi=Hi*H'*pinv(H0)*Ae; 
                         P_yi(j,:)=(HJi*YX - HJi(:,j)*yi)/(1-HJi(:,j)); 
-%                       HJi=Hi*pinv(H0)*Hs';
-%                       P_yi(j,:)=(HJi*YX - HJi(:,j)*yi)/(1-HJi(:,j));
-                        % Calculate the i-th cross validation error
+                        % HJi=Hi*pinv(H0)*Hs';
+                        % P_yi(j,:)=(HJi*YX - HJi(:,j)*yi)/(1-HJi(:,j));
                         ri(j,:)=abs(yi-P_yi(j,:));
                     end
                     % Calculate the mean square error

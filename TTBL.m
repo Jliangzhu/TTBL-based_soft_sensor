@@ -29,7 +29,7 @@ H_X=[Z,H];
 H_Xs=H_X(1:Ns,:); H_Xt=H_X((Ns+1):end,:);
 Btail=(speye(size(H_X',1))+Ct*(H_X'*L*H_X)+(H_Xs'*H_Xs))\(H_Xs'*S);
 TY=H_Xt*Btail;
-% Y=[T;zeros(size(Pt,1),1)];
+% Y=[S;zeros(size(Pt,1),1)]; % Alternatively
 % Btail=(speye(Ns+Nt) +Ct*L*(H_X*H_X')+ Ae*(H_X*H_X')) \ (Ae*Y);
 % B=H_X'*Btail; Yhat=H_X*B;
 % TY=Yhat((Ns+1):end,:);
